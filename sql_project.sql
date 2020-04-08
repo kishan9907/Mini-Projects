@@ -114,9 +114,9 @@ ORDER BY `totcost`.`cost` DESC;
 /* Q10: Produce a list of facilities with a total revenue less than 1000.
 The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
+
 SELECT totcost.name, SUM( totcost.cost ) tot_revenue
 FROM (
-
 SELECT fc.name,
 CASE WHEN mem.memid =0
 THEN fc.guestcost * bk.slots
@@ -128,4 +128,5 @@ WHERE bk.facid = fc.facid
 AND bk.memid = mem.memid
 )totcost
 GROUP BY totcost.name
-HAVING SUM( totcost.cost ) <1000;
+HAVING SUM( totcost.cost ) <1000
+ORDER BY `tot_revenue`;
